@@ -1,10 +1,33 @@
+//riki
+"use client";
 import "./login.css";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function Login() {
+  const [isLogin, setIsLogin] = useState(true);
   return (
     <div className="form-container">
-      <h2>Login</h2>
+      <h2>{isLogin ? "Login" : "Register"}</h2>
+
+      {!isLogin && (
+        <>
+          <div className="input-box">
+            <input type="text" placeholder="Nama Lengkap" required />
+            <span>Nama Lengkap</span>
+          </div>
+
+          <div className="input-box">
+            <input type="text" placeholder="Username" required />
+            <span>Username</span>
+          </div>
+
+          <div className="input-box">
+            <input type="text" placeholder="No HP" required />
+            <span>No HP</span>
+          </div>
+        </>
+      )}
 
       <div className="input-box">
         <input type="numerik" placeholder="NIK" required />
@@ -22,8 +45,16 @@ export default function Login() {
       </div>
 
       <Link href="/" className="submit-btn">
-        Login
+        {isLogin ? "Login" : "Register"}
       </Link>
+      <p>
+        {isLogin ? "Belum punya akun?" : "Sudah punya akun?"}
+        <span
+          onClick={() => setIsLogin}
+          >
+          {isLogin ? "Register" : "Login"}
+         </span>
+      </p>
     </div>
   );
 }
