@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Menu from "./components/navbar";
 
 export default function Home() {
   return (

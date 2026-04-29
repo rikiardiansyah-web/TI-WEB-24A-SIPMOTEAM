@@ -18,7 +18,7 @@ export default function Menu() {
             document.body.classList.remove("dark");
         }
     }, [darkMode]);
-
+//rikigit
     let bg_color;
 
     if (pathname === "/") {
