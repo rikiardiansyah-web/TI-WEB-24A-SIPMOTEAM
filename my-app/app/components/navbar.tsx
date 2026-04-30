@@ -4,10 +4,12 @@ import Link from "next/link";
 import {usePathname} from "next/navigation";
 import React, { use } from "react";
 import { useState, useEffect } from "react";
+import "./nav.css";
 
 export default function Menu() {
     const pathname = usePathname();
     const [darkMode, setdarkMode] = React.useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
 
     useEffect(() => {
         if (darkMode) {
@@ -21,27 +23,26 @@ export default function Menu() {
 //rikigit
     let bg_color;
 
-    if (pathname === "/") {
-        bg_color = "bg-blue-700";
-} else {
-        bg_color = "bg-white";
-}
 return (
-    <nav className="mt-5 mx-10 flex flex-col sm:flex-row justify-start text-center">
-        <Link
-            href="/"
-            className={`${bg_color} hover:bg-red-700 text-red-700 hover:text-white px-10 py-2.5 rounded-full cursor-pointer border-red-700 border sm:w-40 w-full`}>
-            Home
-        </Link>
-        <Link
-             href="/profil"
-             className={
-            "bg-white hover:bg-red-700 text-red-700 hover:text-white px-10 py-2.5 rounded-full cursor-pointer border-red-700 border sm:w-40 w-full"}>
-        Profil
-      </Link>
-      <button
-        onClick={() => setdarkMode(!darkMode)}
-        className="px-5 py-2 rounded-full border mt-2 sm:mt-0"></button>
-    </nav>
+    <div className="navbar">
+        
+        <div className="navleft">
+            <span className="text">SIPMO</span>
+        </div>
+        <div className={`navright ${menuOpen ? "open" : ""}`}>
+            <Link href="/" className={`navlink ${pathname === "/" ? "active" : ""}`}>
+                Home
+            </Link>
+            <Link href="/about" className={`navlink ${pathname === "/about" ? "active" : ""}`}>
+                About
+            </Link>
+        </div>
+        <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+            {menuOpen ? "X" : "☰"}
+        </button>
+        <button onClick={() => setdarkMode(!darkMode)} className="toggle-btn">
+                {darkMode ? "Light Mode" : "Dark Mode"}
+        </button>
+    </div>
 )
 }
